@@ -2,105 +2,134 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="@android:color/black"
     android:orientation="horizontal" >
-    
+
     <TextView
-            android:id="@+id/InputPanelValue01"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="#dcdcdc"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="1"
-            android:textColor="#000000"
-    		android:onClick="onInputPanelClicked" />
-    
+        android:id="@+id/InputPanelValue01"
+        android:layout_width="40dp"
+        android:layout_height="55dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#dcdcdc"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="onInputPanelClicked"
+        android:text="1"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
     <TextView
-            android:id="@+id/InputPanelValue02"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="#dcdcdc"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="2"
-            android:textColor="#000000"
-    		android:onClick="onInputPanelClicked" />
-    
+        android:id="@+id/InputPanelValue02"
+        android:layout_width="40dp"
+        android:layout_height="55dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#dcdcdc"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="onInputPanelClicked"
+        android:text="2"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
     <TextView
-            android:id="@+id/InputPanelValue03"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="#dcdcdc"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="3"
-            android:textColor="#000000"
-    		android:onClick="onInputPanelClicked" />
-    
+        android:id="@+id/InputPanelValue03"
+        android:layout_width="40dp"
+        android:layout_height="55dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#dcdcdc"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="onInputPanelClicked"
+        android:text="3"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
     <TextView
-            android:id="@+id/InputPanelValue04"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="#dcdcdc"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="4"
-            android:textColor="#000000"
-    		android:onClick="onInputPanelClicked" />
-    
+        android:id="@+id/InputPanelValue04"
+        android:layout_width="40dp"
+        android:layout_height="55dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#dcdcdc"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="onInputPanelClicked"
+        android:text="4"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
     <TextView
-            android:id="@+id/InputPanelValue05"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="#dcdcdc"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="5"
-            android:textColor="#000000"
-    		android:onClick="onInputPanelClicked" />
-    
+        android:id="@+id/InputPanelValue05"
+        android:layout_width="40dp"
+        android:layout_height="55dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#dcdcdc"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="onInputPanelClicked"
+        android:text="5"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
     <TextView
-            android:id="@+id/InputPanelValue06"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="#dcdcdc"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="6"
-            android:textColor="#000000"
-    		android:onClick="onInputPanelClicked" />
-    
+        android:id="@+id/InputPanelValue06"
+        android:layout_width="40dp"
+        android:layout_height="55dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#dcdcdc"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="onInputPanelClicked"
+        android:text="6"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
     <TextView
-            android:id="@+id/InputPanelValue07"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="#dcdcdc"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="7"
-            android:textColor="#000000"
-    		android:onClick="onInputPanelClicked" />
-    
+        android:id="@+id/InputPanelValue07"
+        android:layout_width="40dp"
+        android:layout_height="55dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#dcdcdc"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="onInputPanelClicked"
+        android:text="7"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
     <TextView
-            android:id="@+id/InputPanelValue08"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="#dcdcdc"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="8"
-            android:textColor="#000000"
-    		android:onClick="onInputPanelClicked" />
-    
+        android:id="@+id/InputPanelValue08"
+        android:layout_width="40dp"
+        android:layout_height="55dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#dcdcdc"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="onInputPanelClicked"
+        android:text="8"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
     <TextView
-            android:id="@+id/InputPanelValue09"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="#dcdcdc"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="9"
-            android:textColor="#000000"
-    		android:onClick="onInputPanelClicked" />
+        android:id="@+id/InputPanelValue09"
+        android:layout_width="40dp"
+        android:layout_height="55dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#dcdcdc"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="onInputPanelClicked"
+        android:text="9"
+        android:textColor="#000000"
+        android:textSize="20sp" />
 
 </LinearLayout>

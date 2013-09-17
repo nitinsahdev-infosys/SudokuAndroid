@@ -8,106 +8,145 @@
         android:id="@+id/tableRow1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
         android:layout_margin="1dp" >
 
         <TextView
             android:id="@+id/TextView01"
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:layout_marginRight="1dp"
             android:background="#dcdcdc"
             android:clickable="true"
+            android:editable="true"
             android:gravity="center"
+            android:onClick="OnCellClicked"
             android:text="1"
             android:textColor="#000000"
-        	android:layout_marginRight="1dp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/TextView02"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:background="#d3d3d3"
+            android:layout_marginRight="1dp"
+            android:background="#dcdcdc"
+            android:clickable="true"
+            android:editable="true"
             android:gravity="center"
+            android:onClick="OnCellClicked"
             android:text="2"
             android:textColor="#000000"
-        	android:layout_marginRight="1dp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/TextView03"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:background="#cac9c9"
+            android:background="#dcdcdc"
+            android:clickable="true"
+            android:editable="true"
             android:gravity="center"
+            android:onClick="OnCellClicked"
             android:text="3"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:textSize="20sp" />
     </TableRow>
 
     <TableRow
         android:id="@+id/tableRow2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_margin="1dp" >
+        android:layout_margin="1dp"
+        android:textSize="18sp" >
 
         <TextView
+            android:id="@+id/TextView04"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="1dp"
+            android:background="#dcdcdc"
+            android:clickable="true"
+            android:editable="true"
+            android:gravity="center"
+            android:onClick="OnCellClicked"
+            android:text="4"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/TextView05"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="1dp"
+            android:background="#dcdcdc"
+            android:clickable="true"
+            android:editable="true"
+            android:gravity="center"
+            android:onClick="OnCellClicked"
+            android:text="5"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/TextView06"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:background="#dcdcdc"
+            android:clickable="true"
+            android:editable="true"
             android:gravity="center"
-            android:text="4"
-            android:textColor="#000000"
-        	android:layout_marginRight="1dp" />
-
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="#d3d3d3"
-            android:gravity="center"
-            android:text="5"
-            android:textColor="#000000"
-        	android:layout_marginRight="1dp" />
-
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="#cac9c9"
-            android:gravity="center"
+            android:onClick="OnCellClicked"
             android:text="6"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:textSize="20sp" />
     </TableRow>
 
     <TableRow
         android:id="@+id/tableRow3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
         android:layout_margin="1dp" >
 
         <TextView
+            android:id="@+id/TextView07"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="1dp"
+            android:background="#dcdcdc"
+            android:clickable="true"
+            android:editable="true"
+            android:gravity="center"
+            android:onClick="OnCellClicked"
+            android:text="7"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/TextView08"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="1dp"
+            android:background="#dcdcdc"
+            android:clickable="true"
+            android:editable="true"
+            android:gravity="center"
+            android:onClick="OnCellClicked"
+            android:text="8"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/TextView09"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:background="#dcdcdc"
+            android:clickable="true"
+            android:editable="true"
             android:gravity="center"
-            android:text="7"
-            android:textColor="#000000"
-        	android:layout_marginRight="1dp" />
-
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="#d3d3d3"
-            android:gravity="center"
-            android:text="8"
-            android:textColor="#000000"
-        	android:layout_marginRight="1dp" />
-
-        <TextView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="#cac9c9"
-            android:gravity="center"
+            android:onClick="OnCellClicked"
             android:text="9"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:textSize="20sp" />
     </TableRow>
 
 </TableLayout>

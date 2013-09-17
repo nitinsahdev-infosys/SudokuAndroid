@@ -2,75 +2,97 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <TableLayout
+    <TextView
+        android:id="@+id/TextViewTekedge"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@android:color/black" >
+        android:gravity="center"
+        android:text="Tekedge"
+        android:textSize="24sp" />
+
+    <TableLayout
+        android:id="@+id/sudukoTablelayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/TextViewTekedge"
+        android:background="@android:color/black"
+        android:baselineAligned="true" >
 
         <TableRow
-            android:id="@+id/tableRow1"
+            android:id="@+id/mainTableRow1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
             android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp" >
+            android:baselineAligned="true" >
 
             <include
+                android:id="@+id/r1C1"
                 android:layout_gravity="left"
                 android:layout_marginRight="1dp"
                 layout="@layout/tablerow_square" />
 
             <include
+                android:id="@+id/r1C2"
                 android:layout_gravity="center"
                 android:layout_marginRight="1dp"
                 layout="@layout/tablerow_square" />
 
             <include
+                android:id="@+id/r1C3"
                 android:layout_gravity="right"
                 android:layout_marginRight="1dp"
                 layout="@layout/tablerow_square" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow2"
+            android:id="@+id/mainTableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp" >
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="1dp" >
 
             <include
+                android:id="@+id/r2C1"
                 android:layout_gravity="left"
                 android:layout_marginRight="1dp"
                 layout="@layout/tablerow_square" />
 
             <include
+                android:id="@+id/r2C2"
                 android:layout_gravity="center"
                 android:layout_marginRight="1dp"
                 layout="@layout/tablerow_square" />
 
             <include
+                android:id="@+id/r2C3"
                 android:layout_gravity="right"
                 layout="@layout/tablerow_square" />
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow3"
+            android:id="@+id/mainTableRow3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp" >
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="1dp" >
 
             <include
+                android:id="@+id/r3C1"
                 android:layout_gravity="left"
                 android:layout_marginRight="1dp"
                 layout="@layout/tablerow_square" />
 
             <include
+                android:id="@+id/r3C2"
                 android:layout_gravity="center"
                 android:layout_marginRight="1dp"
                 layout="@layout/tablerow_square" />
 
             <include
+                android:id="@+id/r3C3"
                 android:layout_gravity="right"
                 layout="@layout/tablerow_square" />
         </TableRow>
