@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutActivity" >
+
+    <TextView
+        android:id="@+id/aboutTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/sudoku_player"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/appVersionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aboutTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="@string/app_version"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/appVersionVal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appVersionTitle"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/nitinSahdev"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/appVersionVal"
+        android:layout_marginTop="145dp"
+        android:gravity="center"
+        android:text="@string/nitin_sahdev"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/poojaGoel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/nitinSahdev"
+        android:gravity="center"
+        android:text="@string/pooja_goel"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/developers"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/nitinSahdev"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="70dp"
+        android:gravity="center"
+        android:text="@string/developers"
+        android:textSize="20sp" />
+
+</RelativeLayout>

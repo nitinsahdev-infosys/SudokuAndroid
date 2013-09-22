@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#acdcdc"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="40dp"
+        android:onClick="OnButtonClicked"
+        android:text="@string/Tekedge"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/newPuzzle"
+        android:layout_width="@dimen/main_menu_button_size"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/resumePuzzle"
+        android:layout_below="@+id/resumePuzzle"
+        android:layout_marginTop="25dp"
+        android:clickable="true"
+        android:onClick="OnButtonClicked"
+        android:text="@string/newPuzzle"
+        android:textSize="@dimen/main_menu_text_size" />
+
+    <Button
+        android:id="@+id/help"
+        android:layout_width="@dimen/main_menu_button_size"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/newPuzzle"
+        android:layout_below="@+id/settings"
+        android:layout_marginTop="39dp"
+        android:onClick="OnButtonClicked"
+        android:text="@string/help"
+        android:textSize="@dimen/main_menu_text_size" />
+
+    <Button
+        android:id="@+id/about"
+        android:layout_width="@dimen/main_menu_button_size"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/newPuzzle"
+        android:layout_below="@+id/newPuzzle"
+        android:layout_marginTop="26dp"
+        android:onClick="OnButtonClicked"
+        android:text="@string/about"
+        android:textSize="@dimen/main_menu_text_size" />
+
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="@dimen/main_menu_button_size"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/help"
+        android:layout_below="@+id/about"
+        android:layout_marginTop="38dp"
+        android:onClick="OnButtonClicked"
+        android:text="@string/settings"
+        android:textSize="@dimen/main_menu_text_size" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="OnButtonClicked"
+        android:text="@string/sudokuplayer"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/resumePuzzle"
+        android:layout_width="@dimen/main_menu_button_size"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+       android:layout_marginTop="12dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="OnButtonClicked"
+        android:text="@string/resumePuzzle"
+        android:textSize="@dimen/main_menu_text_size" />
+
+</RelativeLayout>

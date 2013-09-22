@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/inputPanel_textView_width"
+    android:layout_height="@dimen/inputPanel_textView_height"
+    android:background="#dcdcdc"
+    android:clickable="true"
+    android:gravity="center"
+    android:onClick="onInputPanelClicked"
+    android:text="@string/first"
+    android:textSize="@dimen/inputPanel_tv_size" />

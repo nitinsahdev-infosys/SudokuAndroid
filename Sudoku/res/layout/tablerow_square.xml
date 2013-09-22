@@ -11,94 +11,81 @@
         android:layout_margin="1dp" >
 
         <TextView
-            android:id="@+id/TextView01"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="@dimen/textView_width"
+            android:layout_height="@dimen/textView_height"
             android:layout_marginRight="1dp"
             android:background="#dcdcdc"
             android:clickable="true"
             android:editable="true"
             android:gravity="center"
-            android:onClick="OnCellClicked"
-            android:text="1"
+            android:onClick="onCellClicked"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="@dimen/textview_size" />
 
         <TextView
-            android:id="@+id/TextView02"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="@dimen/textView_width"
+            android:layout_height="@dimen/textView_height"
             android:layout_marginRight="1dp"
             android:background="#dcdcdc"
             android:clickable="true"
             android:editable="true"
             android:gravity="center"
-            android:onClick="OnCellClicked"
-            android:text="2"
+            android:onClick="onCellClicked"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="@dimen/textview_size" />
 
         <TextView
-            android:id="@+id/TextView03"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="@dimen/textView_width"
+            android:layout_height="@dimen/textView_height"
             android:background="#dcdcdc"
             android:clickable="true"
             android:editable="true"
             android:gravity="center"
-            android:onClick="OnCellClicked"
-            android:text="3"
+            android:onClick="onCellClicked"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="@dimen/textview_size" />
     </TableRow>
 
     <TableRow
         android:id="@+id/tableRow2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="1dp"
-        android:textSize="18sp" >
+        android:layout_margin="1dp" >
 
         <TextView
-            android:id="@+id/TextView04"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="@dimen/textView_width"
+            android:layout_height="@dimen/textView_height"
             android:layout_marginRight="1dp"
             android:background="#dcdcdc"
             android:clickable="true"
             android:editable="true"
             android:gravity="center"
-            android:onClick="OnCellClicked"
-            android:text="4"
+            android:onClick="onCellClicked"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="@dimen/textview_size" />
 
         <TextView
-            android:id="@+id/TextView05"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="@dimen/textView_width"
+            android:layout_height="@dimen/textView_height"
             android:layout_marginRight="1dp"
             android:background="#dcdcdc"
             android:clickable="true"
             android:editable="true"
             android:gravity="center"
-            android:onClick="OnCellClicked"
-            android:text="5"
+            android:onClick="onCellClicked"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="@dimen/textview_size" />
 
         <TextView
-            android:id="@+id/TextView06"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="@dimen/textView_width"
+            android:layout_height="@dimen/textView_height"
             android:background="#dcdcdc"
             android:clickable="true"
             android:editable="true"
             android:gravity="center"
-            android:onClick="OnCellClicked"
-            android:text="6"
+            android:onClick="onCellClicked"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="@dimen/textview_size" />
     </TableRow>
 
     <TableRow
@@ -108,45 +95,39 @@
         android:layout_margin="1dp" >
 
         <TextView
-            android:id="@+id/TextView07"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="@dimen/textView_width"
+            android:layout_height="@dimen/textView_height"
             android:layout_marginRight="1dp"
             android:background="#dcdcdc"
             android:clickable="true"
             android:editable="true"
             android:gravity="center"
-            android:onClick="OnCellClicked"
-            android:text="7"
+            android:onClick="onCellClicked"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="@dimen/textview_size" />
 
         <TextView
-            android:id="@+id/TextView08"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="@dimen/textView_width"
+            android:layout_height="@dimen/textView_height"
             android:layout_marginRight="1dp"
             android:background="#dcdcdc"
             android:clickable="true"
             android:editable="true"
             android:gravity="center"
-            android:onClick="OnCellClicked"
-            android:text="8"
+            android:onClick="onCellClicked"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="@dimen/textview_size" />
 
         <TextView
-            android:id="@+id/TextView09"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="@dimen/textView_width"
+            android:layout_height="@dimen/textView_height"
             android:background="#dcdcdc"
             android:clickable="true"
             android:editable="true"
             android:gravity="center"
-            android:onClick="OnCellClicked"
-            android:text="9"
+            android:onClick="onCellClicked"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="@dimen/textview_size" />
     </TableRow>
 
 </TableLayout>

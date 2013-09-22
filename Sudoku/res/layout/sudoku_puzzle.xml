@@ -2,23 +2,36 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <TextView
-        android:id="@+id/TextViewTekedge"
+    <LinearLayout
+        android:id="@+id/TimerLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:text="Tekedge"
-        android:textSize="24sp" />
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/TextViewTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/TextViewTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/timer"
+            android:textSize="18sp" />
+    </LinearLayout>
 
     <TableLayout
         android:id="@+id/sudukoTablelayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_below="@id/TextViewTekedge"
+        android:layout_below="@id/TimerLayout"
         android:background="@android:color/black"
-        android:baselineAligned="true" >
+        android:baselineAligned="true"
+        android:gravity="center" >
 
         <TableRow
             android:id="@+id/mainTableRow1"
@@ -99,9 +112,19 @@
     </TableLayout>
 
     <include
+        android:id="@+id/input_panel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         layout="@layout/input_panel" />
+
+    <Button
+        android:id="@+id/btnSubmitPuzzle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/input_panel"
+        android:layout_centerHorizontal="true"
+        android:onClick="onSubmitPuzzle"
+        android:text="@string/buttonSubmit" />
 
 </RelativeLayout>

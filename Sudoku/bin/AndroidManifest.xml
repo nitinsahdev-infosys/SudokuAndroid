@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.game.sudoku.MainActivity"
+            android:name="com.game.sudoku.MainMenuActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -22,6 +22,22 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.game.sudoku.SudokuPuzzleActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.game.sudoku.AboutActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.game.sudoku.SettingsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.game.sudoku.HelpActivity"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 
