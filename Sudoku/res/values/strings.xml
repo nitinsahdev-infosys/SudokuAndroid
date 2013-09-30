@@ -22,9 +22,9 @@
     <string name="about">About</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="sudokuplayer">Sudoku Player</string>
-    <string name="Tekedge">Powered by: Tekedge - Infosys</string>
+    <string name="Tekedge">Powered by: TeKedge - Infosys</string>
     <string name="alertmsg">Do you want to save current game?</string>
     <string name="time">"Time : "</string>
     <string name="timer">00:00</string>
@@ -40,11 +40,19 @@
     <string name="avgTimePerMove">Average time per move</string>
     <string name="numOfMoves">Number of Moves</string>
     <string name="timeOfLastMove">Last move time</string>
-    <string name="incompletePuzzle">Sudoku TeKedge - It seems you have not yet completed the puzzle</string>
+    <string name="incompletePuzzle">Sudoku TeKedge \n\nIt seems you have not yet completed the puzzle</string>
     <string name="timeIsOver">Unfortunately you did not make a move in the stipulated time. Your game is over. \n\nPlease try again</string>
-    <string name="unsuccessful_attempt">Sudoku TeKedge - This is not the correct solution. You should try again</string>
+    <string name="unsuccessful_attempt">Sudoku TeKedge \n\nThis is not the correct solution. \nYou should try again</string>
     <string name="puzzleCompletedSuccess">"Hurray!!! You have successfully completed the puzzle in "</string>
     <string name="max_time_allowed_text">Max time allowed between moves</string>
+    
+    <string name="easyUnsolvedPuzzle">"###7##36#67##4###14#9#5#7##43###6#7#9##1#4##6#1#9###45##5#1#6#72#9#6##35#67#24###"</string>
+    <string name="mediumUnsolvedPuzzle">"#2#89##7#4#76#1#85###4#3#2#45#9##6#2##3#4####8####7#94##9#48####1#7##8#2#8##31###"</string>
+    <string name="complexUnsolvedPuzzle">"###6###9#2##5#1#347##4###6##2##7##5##9#68#7#3##7##5#28#1#2#8#6#3######1##74###2##"</string>
+    
+    <string name="easySolvedPuzzle">"581792364672843591439651782438256179957184326216973845845913627219768435367524198"</string>
+    <string name="mediumSolvedPuzzle">"126895374437621985958473126457983612193246578862517394269548731314769852785231649"</string>
+    <string name="complexSolvedPuzzle">"435682197269571834781493562826374951195682743347915628519248763326957418874136259"</string>
 
     <string-array name="max_time_allowed_array">
         <item name="five_minutes">"5 mins"</item>
@@ -59,6 +67,5 @@
     </string-array>
 
     <string name="title_activity_scorecard">ScorecardActivity</string>
-    <string name="hello_world">Hello world!</string>
 
 </resources>

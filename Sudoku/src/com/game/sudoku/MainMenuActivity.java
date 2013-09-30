@@ -49,7 +49,7 @@ public class MainMenuActivity extends Activity {
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
 
-							Intent intent = new Intent(getApplicationContext(),
+							Intent intent = new Intent(MainMenuActivity.this,
 									SudokuPuzzleActivity.class);
 							Bundle bundle = new Bundle();
 							bundle.putInt("ID", id);
@@ -66,19 +66,18 @@ public class MainMenuActivity extends Activity {
 			// Id for resume puzzle...
 			int id = 3;
 
-			Intent resumeIntent = new Intent(getApplicationContext(),
-					SudokuPuzzleActivity.class);
+			Intent resumeIntent = new Intent(this, SudokuPuzzleActivity.class);
 			Bundle bundle = new Bundle();
 			bundle.putInt("ID", id);
 			resumeIntent.putExtras(bundle);
 			startActivity(resumeIntent);
 		}
 		if (v.equals(findViewById(R.id.about))) {
-			intent = new Intent(getApplicationContext(), AboutActivity.class);
+			intent = new Intent(this, AboutActivity.class);
 			startActivity(intent);
 		}
 		if (v.equals(findViewById(R.id.settings))) {
-			intent = new Intent(getApplicationContext(), SettingsActivity.class);
+			intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
 		}
 

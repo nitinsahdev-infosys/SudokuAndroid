@@ -2,13 +2,12 @@ package com.game.sudoku;
 
 import java.util.Date;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.TextView;
+
 import com.game.sudoku.utils.Constants;
 import com.game.sudoku.utils.SudokuSharedPreferences;
-
-import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
-import android.widget.TextView;
 
 public class ScorecardActivity extends Activity {
 
@@ -51,6 +50,7 @@ public class ScorecardActivity extends Activity {
 		
 		//Date and time of the last move
 		Date dt = new Date(sudokuSharedPrefs.getLong(Constants.LAST_MOVE_TIME));
+		@SuppressWarnings("deprecation")
 		String dateStr = dt.toLocaleString();
 		lastMoveTV.setText(dateStr);
 

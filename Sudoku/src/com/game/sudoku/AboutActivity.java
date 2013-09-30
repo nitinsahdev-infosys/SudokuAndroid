@@ -12,17 +12,17 @@ public class AboutActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_about);
-		
+
 		try {
 			PackageManager pm = this.getPackageManager();
-			PackageInfo pi = pm.getPackageInfo(getPackageName(), PackageManager.GET_META_DATA);
-			
+			PackageInfo pi = pm.getPackageInfo(getPackageName(),
+					PackageManager.GET_META_DATA);
+
 			TextView appVersionValTextView = (TextView) findViewById(R.id.appVersionVal);
 			appVersionValTextView.setText(pi.versionName);
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
-				
-		
+
 	}
 }

@@ -9,13 +9,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.PopupWindow;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -30,23 +27,14 @@ public class SudokuPuzzleActivity extends Activity {
 	private boolean isHighlighted = false;
 	private TextView previousSelected = null;
 
-	String easyUnsolvedPuzzle = "581792364672843591439651782438256179957184326"
-			+ "2169738458459136272197684353675241##";
-	// String easyUnsolvedPuzzle = "###7##36#67##4###14#9#5#7##43###6#7#9##1"
-	// + "#4##6#1#9###45##5#1#6#72#9#6##35#67#24###";
-	String mediumUnsolvedPuzzle = "#2#89##7#4#76#1#85###4#3#2#45#9##6#2##3#4"
-			+ "####8####7#94##9#48####1#7##8#2#8##31###";
-	String complexUnsolvedPuzzle = "###6###9#2##5#1#347##4###6##2##7##5##9#6"
-			+ "8#7#3##7##5#28#1#2#8#6#3######1##74###2##";
+	String easyUnsolvedPuzzle = getString(R.string.easyUnsolvedPuzzle);
+	String mediumUnsolvedPuzzle = getString(R.string.mediumUnsolvedPuzzle);
+	String complexUnsolvedPuzzle = getString(R.string.complexUnsolvedPuzzle);
 
-	String easySolvedPuzzle = "581792364672843591439651782438256179957184326"
-			+ "216973845845913627219768435367524198";
-	String mediumSolvedPuzzle = "12689537443762198595847312645798361219324657"
-			+ "8862517394269548731314769852785231649";
-	String complexSolvedPuzzle = "4356821972695718347814935628263749511956827"
-			+ "43347915628519248763326957418874136259";
+	String easySolvedPuzzle = getString(R.string.easySolvedPuzzle);
+	String mediumSolvedPuzzle = getString(R.string.mediumSolvedPuzzle);
+	String complexSolvedPuzzle = getString(R.string.complexSolvedPuzzle);
 
-	String puzzleArray = "";
 	String savePuzzleArray = "";
 
 	private long startTime = 0L;
@@ -66,6 +54,11 @@ public class SudokuPuzzleActivity extends Activity {
 	int selectPuzzleID;
 
 	private SudokuSharedPreferences sudokuSharedPrefs = null;
+	private final Context ctx = this;
+
+	private AlertDialog onBackDialog = null;
+	private AlertDialog timeOverDialog = null;
+	private AlertDialog puzzleCompletedDialog = null;
 
 	/*
 	 * totalTime average time between entering values
@@ -143,6 +136,17 @@ public class SudokuPuzzleActivity extends Activity {
 	@Override
 	protected void onPause() {
 		super.onPause();
+
+		if (puzzleCompletedDialog != null) {
+			puzzleCompletedDialog.dismiss();
+		}
+		if (onBackDialog != null) {
+			onBackDialog.dismiss();
+		}
+		if (timeOverDialog != null) {
+			timeOverDialog.dismiss();
+		}
+
 	}
 
 	@Override
@@ -151,12 +155,22 @@ public class SudokuPuzzleActivity extends Activity {
 		super.onResume();
 	}
 
+	@Override
+	protected void onDestroy() {
+
+		if (sudokuSharedPrefs != null) {
+			sudokuSharedPrefs = null;
+		}
+
+		customHandler.removeCallbacks(updateTimerThread, null);
+		super.onDestroy();
+	}
+
 	/**
 	 * start the thread
 	 */
 	private void setPuzzleTimer() {
-		runOnUiThread(updateTimerThread);
-		// customHandler.postDelayed(updateTimerThread, 0);
+		customHandler.postDelayed(updateTimerThread, 0);
 		sudokuSharedPrefs.putLong(Constants.LAST_MOVE_TIME,
 				System.currentTimeMillis());
 	}
@@ -254,7 +268,7 @@ public class SudokuPuzzleActivity extends Activity {
 	 * 
 	 * to fill puzzle
 	 */
-	private void fillPuzzle(String puzzleArray, Boolean isResuming) {
+	private void fillPuzzle(String _puzzleArray, Boolean isResuming) {
 		TableLayout sudukoTablelayout = (TableLayout) findViewById(id.sudukoTablelayout);
 
 		int x = 0;
@@ -280,7 +294,7 @@ public class SudokuPuzzleActivity extends Activity {
 						TextView textView = (TextView) innerMostTableRow
 								.getChildAt(n);
 
-						char charAtx = puzzleArray.charAt(x);
+						char charAtx = _puzzleArray.charAt(x);
 						if (charAtx == '#') {
 							charAtx = '\0';
 							textView.setText("" + charAtx);
@@ -288,8 +302,8 @@ public class SudokuPuzzleActivity extends Activity {
 							// Ignore this char and continue.
 						} else {
 							if (!isResuming) {
-								textView.setBackgroundColor(Color.rgb(171, 169,
-										170));
+								// marking pre filled elements
+								textView.setBackgroundResource(R.drawable.filled_rounded_edges);
 								textView.setEnabled(false);
 							}
 							textView.setText("" + charAtx);
@@ -446,12 +460,6 @@ public class SudokuPuzzleActivity extends Activity {
 						} else {
 							savePuzzleArray += '#';
 						}
-
-						// if (ch == '\0') {
-						//
-						// } else {
-						// savePuzzleArray += textView.getText();
-						// }
 					}
 				}
 			}
@@ -546,8 +554,6 @@ public class SudokuPuzzleActivity extends Activity {
 	}
 
 	public void onSubmitPuzzle(View v) {
-		// TODO: Stop the timer.
-
 		getPuzzle();
 		computeResult();
 	}
@@ -573,8 +579,7 @@ public class SudokuPuzzleActivity extends Activity {
 
 	private void showDialogMessage(String title, String msg, String buttonText) {
 
-		AlertDialog.Builder builder1 = new AlertDialog.Builder(
-				SudokuPuzzleActivity.this);
+		AlertDialog.Builder builder1 = new AlertDialog.Builder(ctx);
 		builder1.setMessage(msg);
 		builder1.setTitle(title);
 
@@ -590,20 +595,19 @@ public class SudokuPuzzleActivity extends Activity {
 				});
 
 		// Create the AlertDialog
-		AlertDialog dialog = builder1.create();
-		dialog.show();
+		puzzleCompletedDialog = builder1.create();
+		puzzleCompletedDialog.show();
 	}
 
 	@Override
 	public void onBackPressed() {
-		AlertDialog.Builder builder2 = new AlertDialog.Builder(
-				SudokuPuzzleActivity.this);
+		AlertDialog.Builder builder2 = new AlertDialog.Builder(ctx);
 		builder2.setMessage(R.string.alertmsg);
 
 		// Add the buttons
 		builder2.setPositiveButton(R.string.yes,
 				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) { 
+					public void onClick(DialogInterface dialog, int id) {
 						// Add code for Yes
 						savePuzzle();
 						dialog.dismiss();
@@ -618,9 +622,9 @@ public class SudokuPuzzleActivity extends Activity {
 					}
 				});
 
-		// Create the AlertDialog 
-		AlertDialog dialog = builder2.create();
-		dialog.show();
+		// Create the AlertDialog
+		onBackDialog = builder2.create();
+		onBackDialog.show();
 
 	}
 
@@ -659,8 +663,7 @@ public class SudokuPuzzleActivity extends Activity {
 
 					isTimeOverDialogShown = true;
 
-					AlertDialog.Builder builder3 = new AlertDialog.Builder(
-							SudokuPuzzleActivity.this);
+					AlertDialog.Builder builder3 = new AlertDialog.Builder(ctx);
 					builder3.setMessage(getString(R.string.timeIsOver));
 					builder3.setTitle(getString(R.string.Tekedge));
 					builder3.setNeutralButton("Ok",
@@ -676,8 +679,8 @@ public class SudokuPuzzleActivity extends Activity {
 							});
 
 					// Create the AlertDialog
-					AlertDialog dialog = builder3.create();
-					dialog.show();
+					timeOverDialog = builder3.create();
+					timeOverDialog.show();
 				}
 			}
 		}

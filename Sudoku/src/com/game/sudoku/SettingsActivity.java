@@ -82,7 +82,7 @@ public class SettingsActivity extends Activity {
 		int id = (int) _id;
 		switch (id) {
 		case 0:
-			sudokuSharedPref.putInt(Constants.MAX_TIME_BETWEEN_MOVES, 1);
+			sudokuSharedPref.putInt(Constants.MAX_TIME_BETWEEN_MOVES, 5);
 			break;
 		case 1:
 			sudokuSharedPref.putInt(Constants.MAX_TIME_BETWEEN_MOVES, 10);

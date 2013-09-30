@@ -6,7 +6,7 @@
     <dimen name="textView_width">34dp</dimen>
     <dimen name="textView_height">29dp</dimen>
     <dimen name="textview_size">22sp</dimen>
-    <dimen name="inputPanel_textView_width">61dp</dimen>
+    <dimen name="inputPanel_textView_width">59dp</dimen>
     <dimen name="inputPanel_textView_height">40dp</dimen>
     <dimen name="inputPanel_tv_size">24sp</dimen>
     <dimen name="about_headings">20sp</dimen>
@@ -15,5 +15,5 @@
     <dimen name="scorecard_items_size">16sp</dimen>
     <dimen name="subscript_size">14sp</dimen>
     <dimen name="main_menu_button_size">130dp</dimen>
-
+	<dimen name="rounded_radius">3px</dimen>
 </resources>
