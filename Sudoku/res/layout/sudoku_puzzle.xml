@@ -2,17 +2,17 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/TimerLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:orientation="horizontal" >
+        android:layout_alignParentTop="true" >
 
         <TextView
             android:id="@+id/TextViewTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="3dp"
             android:text="@string/time"
             android:textSize="18sp" />
 
@@ -20,9 +20,22 @@
             android:id="@+id/TextViewTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/TextViewTime"
+            android:gravity="right"
             android:text="@string/timer"
             android:textSize="18sp" />
-    </LinearLayout>
+
+        <TextView
+            android:id="@+id/TextViewLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:paddingRight="3dp"
+            android:text="@string/level"
+            android:textSize="18sp" />
+    </RelativeLayout>
 
     <TableLayout
         android:id="@+id/sudukoTablelayout"
@@ -125,6 +138,7 @@
         android:layout_above="@+id/input_panel"
         android:layout_centerHorizontal="true"
         android:onClick="onSubmitPuzzle"
-        android:text="@string/buttonSubmit" />
+        android:text="@string/buttonSubmit"
+        android:textSize="@dimen/textview_size" />
 
 </RelativeLayout>

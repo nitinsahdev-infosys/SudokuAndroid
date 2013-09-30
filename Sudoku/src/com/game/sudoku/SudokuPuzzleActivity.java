@@ -2,15 +2,20 @@ package com.game.sudoku;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -25,46 +30,49 @@ public class SudokuPuzzleActivity extends Activity {
 	private boolean isHighlighted = false;
 	private TextView previousSelected = null;
 
-	String EasyUnsolvedPuzzle = "3###1#78#5#1####9#####56###17#82#5#####"
-			+ "##########1492#4#####98925####8376######45";
+	String easyUnsolvedPuzzle = "581792364672843591439651782438256179957184326"
+			+ "2169738458459136272197684353675241##";
+	// String easyUnsolvedPuzzle = "###7##36#67##4###14#9#5#7##43###6#7#9##1"
+	// + "#4##6#1#9###45##5#1#6#72#9#6##35#67#24###";
+	String mediumUnsolvedPuzzle = "#2#89##7#4#76#1#85###4#3#2#45#9##6#2##3#4"
+			+ "####8####7#94##9#48####1#7##8#2#8##31###";
+	String complexUnsolvedPuzzle = "###6###9#2##5#1#347##4###6##2##7##5##9#6"
+			+ "8#7#3##7##5#28#1#2#8#6#3######1##74###2##";
 
-	String easyUnsolvedPuzzle1 = "3##914785581237694479856231179823546462"
-			+ "759813583614927431657298925148376768392145";
-	String mediumUnsolvedPuzzle = "#6###########7694##9856####79823######627"
-			+ "#98#########274316##29##25##8##676###214#";
-	String complexUnsolvedPuzzle = "####14#####12#7########6231##98####646##"
-			+ "5########14#2##31#####89#####37##683##1#5";
-
-	String easySolvedPuzzle = "3629147855812376944798562311798235464627"
-			+ "59813583614927431657298925148376768392145";
-	String mediumSolvedPuzzle = "3629147855812376944798562311798235464627"
-			+ "59813583614927431657298925148376768392145";
-	String complexSolvedPuzzle = "3629147855812376944798562311798235464627"
-			+ "59813583614927431657298925148376768392145";
+	String easySolvedPuzzle = "581792364672843591439651782438256179957184326"
+			+ "216973845845913627219768435367524198";
+	String mediumSolvedPuzzle = "12689537443762198595847312645798361219324657"
+			+ "8862517394269548731314769852785231649";
+	String complexSolvedPuzzle = "4356821972695718347814935628263749511956827"
+			+ "43347915628519248763326957418874136259";
 
 	String puzzleArray = "";
-
 	String savePuzzleArray = "";
 
 	private long startTime = 0L;
 	long timeInMilliseconds = 0L;
 	int seconds = 0;
 	int minutes = 0;
-	
-	double avgTimePerMove = 0.0f;
+
+	float avgTimePerMove = 0.0f;
 	int numberOfMoves = 0;
-	
+	long timeOfLastMove = 0;
+
 	private TextView timerTextView = null;
+	private TextView levelTextView = null;
 	private Handler customHandler = new Handler();
 	public static String timerVal = "";
 	boolean isResuming = false;
+	int selectPuzzleID;
 
-	private SudokuSharedPreferences sudokuSharedPreferences = null;
+	private SudokuSharedPreferences sudokuSharedPrefs = null;
 
 	/*
 	 * totalTime average time between entering values
 	 */
 	boolean isActivityInFocus = false;
+	boolean isTimeOverDialogShown = false;
+	boolean shouldTimerThreadRun = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,22 +81,63 @@ public class SudokuPuzzleActivity extends Activity {
 		setContentView(R.layout.sudoku_puzzle);
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
-		int selectPuzzleID = bundle.getInt("ID");
-		sudokuSharedPreferences = SudokuSharedPreferences
+
+		if (bundle.size() > 0)
+			selectPuzzleID = bundle.getInt("ID");
+
+		isTimeOverDialogShown = false;
+		shouldTimerThreadRun = true;
+		sudokuSharedPrefs = SudokuSharedPreferences
 				.getSudokuSharedPreferences(this);
 
 		// to set timer
 		timerTextView = (TextView) findViewById(R.id.TextViewTimer);
 		startTime = SystemClock.uptimeMillis();
-		
-		
+		if (selectPuzzleID >= 0 && selectPuzzleID < 3) {
+			String[] array = getResources().getStringArray(R.array.strArray);
+			sudokuSharedPrefs.putString(Constants.SAVED_PUZZLE_LEVEL,
+					array[selectPuzzleID]);
+			setPuzzleLevel();
+		}
+
 		setPuzzle(selectPuzzleID);
 		setPuzzleTimer();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
 		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+		case R.id.action_settings:
+			Intent intent = new Intent(getApplicationContext(),
+					SettingsActivity.class);
+			startActivity(intent);
+			return true;
+		case R.id.action_scorecard:
+
+			saveScoreCardValues();
+
+			Intent intent1 = new Intent(getApplicationContext(),
+					ScorecardActivity.class);
+			startActivity(intent1);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	private void saveScoreCardValues() {
+		sudokuSharedPrefs.putInt(Constants.TIMER_MINUTES, minutes);
+		sudokuSharedPrefs.putInt(Constants.TIMER_SECONDS, seconds);
+		sudokuSharedPrefs.putFloat(Constants.AVERAGE_TIME_PER_MOVE,
+				avgTimePerMove);
+		sudokuSharedPrefs.putInt(Constants.NUMBER_OF_MOVES, numberOfMoves);
 	}
 
 	@Override
@@ -106,24 +155,42 @@ public class SudokuPuzzleActivity extends Activity {
 	 * start the thread
 	 */
 	private void setPuzzleTimer() {
-		customHandler.postDelayed(updateTimerThread, 0);
+		runOnUiThread(updateTimerThread);
+		// customHandler.postDelayed(updateTimerThread, 0);
+		sudokuSharedPrefs.putLong(Constants.LAST_MOVE_TIME,
+				System.currentTimeMillis());
 	}
 
 	/**
+	 * This method handles the input from the inputpanel at the bottom of the
+	 * puzzle screen. In addition this method also update the time of the last
+	 * move and stores it in the sudoku shared preferences.
 	 * 
 	 * @param v
-	 *            : view
+	 *            : view who's click events is to be handled.
 	 */
 	public void onInputPanelClicked(View v) {
 		if (v.equals(findViewById(R.id.InputPanelClear))) {
 			setValueInCell("");
 		} else {
 			setValueInCell(((Button) v).getText());
+			numberOfMoves++;
 		}
+
+		timeOfLastMove = System.currentTimeMillis();
+		sudokuSharedPrefs.putLong(Constants.LAST_MOVE_TIME, timeOfLastMove);
+	}
+
+	private void setPuzzleLevel() {
+		// to set level of complexity on screen
+		levelTextView = (TextView) findViewById(R.id.TextViewLevel);
+		levelTextView.setText(getString(R.string.level)
+				+ sudokuSharedPrefs.getString(Constants.SAVED_PUZZLE_LEVEL));
 	}
 
 	/**
-	 * Set the selected puzzle
+	 * This method loads the required puzzle into the puzzle screen. This is the
+	 * same method which will be called when the puzzle will be resumed.
 	 * 
 	 * @param selectedComplexity
 	 */
@@ -131,18 +198,17 @@ public class SudokuPuzzleActivity extends Activity {
 		StringBuilder strBuilder = new StringBuilder();
 		switch (selectedComplexity) {
 		case 0:
-			for (int i = 0; i < easyUnsolvedPuzzle1.length(); i++) {
-				strBuilder.append(easyUnsolvedPuzzle1.charAt(i));
+			for (int i = 0; i < easyUnsolvedPuzzle.length(); i++) {
+				strBuilder.append(easyUnsolvedPuzzle.charAt(i));
 			}
-			sudokuSharedPreferences.putString(Constants.LOADED_UNSOLVED_PUZZLE,
-					easyUnsolvedPuzzle1);
-			sudokuSharedPreferences.putString(Constants.LOADED_PUZZLE_SOLUTION,
+			sudokuSharedPrefs.putString(Constants.LOADED_UNSOLVED_PUZZLE,
+					easyUnsolvedPuzzle);
+			sudokuSharedPrefs.putString(Constants.LOADED_PUZZLE_SOLUTION,
 					easySolvedPuzzle);
-			sudokuSharedPreferences.putString(Constants.PUZZLE_ARRAY,
+			sudokuSharedPrefs.putString(Constants.PUZZLE_ARRAY,
 					strBuilder.toString());
-			sudokuSharedPreferences.putBoolean(Constants.IS_PUZZLE_SAVED, false);
-			fillPuzzle(
-					sudokuSharedPreferences.getString(Constants.PUZZLE_ARRAY),
+			sudokuSharedPrefs.putBoolean(Constants.IS_PUZZLE_SAVED, false);
+			fillPuzzle(sudokuSharedPrefs.getString(Constants.PUZZLE_ARRAY),
 					false);
 
 			break;
@@ -150,15 +216,14 @@ public class SudokuPuzzleActivity extends Activity {
 			for (int i = 0; i < mediumUnsolvedPuzzle.length(); i++) {
 				strBuilder.append(mediumUnsolvedPuzzle.charAt(i));
 			}
-			sudokuSharedPreferences.putString(Constants.LOADED_UNSOLVED_PUZZLE,
+			sudokuSharedPrefs.putString(Constants.LOADED_UNSOLVED_PUZZLE,
 					mediumUnsolvedPuzzle);
-			sudokuSharedPreferences.putString(Constants.LOADED_PUZZLE_SOLUTION,
+			sudokuSharedPrefs.putString(Constants.LOADED_PUZZLE_SOLUTION,
 					mediumSolvedPuzzle);
-			sudokuSharedPreferences.putString(Constants.PUZZLE_ARRAY,
+			sudokuSharedPrefs.putString(Constants.PUZZLE_ARRAY,
 					strBuilder.toString());
-			sudokuSharedPreferences.putBoolean(Constants.IS_PUZZLE_SAVED, false);
-			fillPuzzle(
-					sudokuSharedPreferences.getString(Constants.PUZZLE_ARRAY),
+			sudokuSharedPrefs.putBoolean(Constants.IS_PUZZLE_SAVED, false);
+			fillPuzzle(sudokuSharedPrefs.getString(Constants.PUZZLE_ARRAY),
 					false);
 
 			break;
@@ -166,21 +231,21 @@ public class SudokuPuzzleActivity extends Activity {
 			for (int i = 0; i < complexUnsolvedPuzzle.length(); i++) {
 				strBuilder.append(complexUnsolvedPuzzle.charAt(i));
 			}
-			sudokuSharedPreferences.putString(Constants.LOADED_UNSOLVED_PUZZLE,
+			sudokuSharedPrefs.putString(Constants.LOADED_UNSOLVED_PUZZLE,
 					complexUnsolvedPuzzle);
-			sudokuSharedPreferences.putString(Constants.LOADED_PUZZLE_SOLUTION,
+			sudokuSharedPrefs.putString(Constants.LOADED_PUZZLE_SOLUTION,
 					complexSolvedPuzzle);
-			sudokuSharedPreferences.putString(Constants.PUZZLE_ARRAY,
+			sudokuSharedPrefs.putString(Constants.PUZZLE_ARRAY,
 					strBuilder.toString());
-			sudokuSharedPreferences.putBoolean(Constants.IS_PUZZLE_SAVED, false);
-			fillPuzzle(
-					sudokuSharedPreferences.getString(Constants.PUZZLE_ARRAY),
+			sudokuSharedPrefs.putBoolean(Constants.IS_PUZZLE_SAVED, false);
+			fillPuzzle(sudokuSharedPrefs.getString(Constants.PUZZLE_ARRAY),
 					false);
 
 			break;
 
 		case 3:
 			resumePuzzle();
+			break;
 		}
 
 	}
@@ -277,23 +342,36 @@ public class SudokuPuzzleActivity extends Activity {
 			}
 		}
 
-		sudokuSharedPreferences.putString(Constants.SUBMITTED_PUZZLE_NAME,
+		sudokuSharedPrefs.putString(Constants.SUBMITTED_PUZZLE_NAME,
 				sb.toString());
-		computeResult();
 	}
 
 	void computeResult() {
-		if (sudokuSharedPreferences.getString(Constants.SUBMITTED_PUZZLE_NAME)
-				.equals(sudokuSharedPreferences
+		if (sudokuSharedPrefs.getString(Constants.SUBMITTED_PUZZLE_NAME)
+				.equals(sudokuSharedPrefs
 						.getString(Constants.LOADED_PUZZLE_SOLUTION))) {
-			Toast.makeText(this,
-					getString(R.string.puzzleCompletedSuccess) + timerVal,
-					Toast.LENGTH_SHORT).show();
-			finish();
+
+			calculateScore();
+			clearOldGameData();
 		} else {
 			Toast.makeText(this, getString(R.string.unsuccessful_attempt),
 					Toast.LENGTH_SHORT).show();
 		}
+	}
+
+	private void clearOldGameData() {
+		sudokuSharedPrefs.putInt(Constants.TIMER_MINUTES, 0);
+		sudokuSharedPrefs.putInt(Constants.TIMER_SECONDS, 0);
+		sudokuSharedPrefs.putFloat(Constants.AVERAGE_TIME_PER_MOVE, 0.0f);
+		sudokuSharedPrefs.putInt(Constants.NUMBER_OF_MOVES, 0);
+		sudokuSharedPrefs.putLong(Constants.LAST_MOVE_TIME, 0l);
+		sudokuSharedPrefs.putInt(Constants.TOTAL_PUZZLE_TIME, 0);
+		sudokuSharedPrefs.putString(Constants.LOADED_UNSOLVED_PUZZLE, "");
+		sudokuSharedPrefs.putString(Constants.LOADED_PUZZLE_SOLUTION, "");
+		sudokuSharedPrefs.putString(Constants.PUZZLE_ARRAY, "");
+		sudokuSharedPrefs.putString(Constants.SAVED_PUZZLE, "");
+		sudokuSharedPrefs.putString(Constants.SUBMITTED_PUZZLE_NAME, "");
+		sudokuSharedPrefs.putBoolean(Constants.IS_PUZZLE_SAVED, false);
 	}
 
 	/**
@@ -363,33 +441,39 @@ public class SudokuPuzzleActivity extends Activity {
 								.getChildAt(n);
 
 						// If the field was empty, store '#' instead.
-						char ch = textView.getText().charAt(0);
-
-						if (ch == '\0') {
-							savePuzzleArray += '#';
-						} else {
+						if (textView.getText().length() > 0) {
 							savePuzzleArray += textView.getText();
+						} else {
+							savePuzzleArray += '#';
 						}
+
+						// if (ch == '\0') {
+						//
+						// } else {
+						// savePuzzleArray += textView.getText();
+						// }
 					}
 				}
 			}
 		}
 
-		sudokuSharedPreferences.putString(Constants.SAVED_PUZZLE,
-				savePuzzleArray);
-		sudokuSharedPreferences.putBoolean(Constants.IS_PUZZLE_SAVED, true);
-		
-		//Save the timer values.
-		sudokuSharedPreferences.putInt(Constants.TIMER_MINUTES, minutes);
-		sudokuSharedPreferences.putInt(Constants.TIMER_SECONDS, seconds);
+		sudokuSharedPrefs.putString(Constants.SAVED_PUZZLE, savePuzzleArray);
+		sudokuSharedPrefs.putBoolean(Constants.IS_PUZZLE_SAVED, true);
+
+		// Save the timer values.
+		sudokuSharedPrefs.putInt(Constants.TIMER_MINUTES, minutes);
+		sudokuSharedPrefs.putInt(Constants.TIMER_SECONDS, seconds);
+		sudokuSharedPrefs.putFloat(Constants.AVERAGE_TIME_PER_MOVE,
+				avgTimePerMove);
+		sudokuSharedPrefs.putInt(Constants.NUMBER_OF_MOVES, numberOfMoves);
 	}
 
 	public void resumePuzzle() {
-		if (sudokuSharedPreferences.getBoolean(Constants.IS_PUZZLE_SAVED)) {
+		if (sudokuSharedPrefs.getBoolean(Constants.IS_PUZZLE_SAVED)) {
 
-			String unsolvedPuzzle = sudokuSharedPreferences
+			String unsolvedPuzzle = sudokuSharedPrefs
 					.getString(Constants.LOADED_UNSOLVED_PUZZLE);
-			String savedPuzzle = sudokuSharedPreferences
+			String savedPuzzle = sudokuSharedPrefs
 					.getString(Constants.SAVED_PUZZLE);
 
 			String resumedPuzzle = "";
@@ -414,16 +498,20 @@ public class SudokuPuzzleActivity extends Activity {
 			resumedPuzzle = sb.toString();
 			fillPuzzle(resumedPuzzle, true);
 		}
-
+		setPuzzleLevel();
 		resumeTimerValue();
 	}
 
 	private void resumeTimerValue() {
-		minutes = sudokuSharedPreferences.getInt(Constants.TIMER_MINUTES);
-		seconds = sudokuSharedPreferences.getInt(Constants.TIMER_SECONDS);
-		
-		timeInMilliseconds = ((minutes * 60) + seconds ) * 1000;
+		minutes = sudokuSharedPrefs.getInt(Constants.TIMER_MINUTES);
+		seconds = sudokuSharedPrefs.getInt(Constants.TIMER_SECONDS);
+
+		timeInMilliseconds = ((minutes * 60) + seconds) * 1000;
 		startTime -= timeInMilliseconds;
+
+		avgTimePerMove = sudokuSharedPrefs
+				.getFloat(Constants.AVERAGE_TIME_PER_MOVE);
+		numberOfMoves = sudokuSharedPrefs.getInt(Constants.NUMBER_OF_MOVES);
 	}
 
 	public void highlightSelected(View v) {
@@ -461,31 +549,77 @@ public class SudokuPuzzleActivity extends Activity {
 		// TODO: Stop the timer.
 
 		getPuzzle();
+		computeResult();
 	}
 
-	@Override
-	public void onBackPressed() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(R.string.alertmsg);
+	public void calculateScore() {
 
-		// Add the buttons
-		builder.setPositiveButton(R.string.yes,
+		saveScoreCardValues();
+		shouldTimerThreadRun = false;
+
+		String totalTimeStr = String.format("%02d",
+				sudokuSharedPrefs.getInt(Constants.TIMER_MINUTES))
+				+ ":"
+				+ String.format("%02d",
+						sudokuSharedPrefs.getInt(Constants.TIMER_SECONDS));
+		int score = Constants.MAX_SCORE - minutes;
+
+		String successMsg = getString(R.string.puzzleCompletedSuccess)
+				+ totalTimeStr + " minutes";
+		successMsg += "\n\n" + "Your score is : " + score;
+
+		showDialogMessage(getString(R.string.Tekedge), successMsg, "Ok");
+	}
+
+	private void showDialogMessage(String title, String msg, String buttonText) {
+
+		AlertDialog.Builder builder1 = new AlertDialog.Builder(
+				SudokuPuzzleActivity.this);
+		builder1.setMessage(msg);
+		builder1.setTitle(title);
+
+		// Add the neutral button
+		builder1.setNeutralButton(buttonText,
 				new DialogInterface.OnClickListener() {
+					@Override
 					public void onClick(DialogInterface dialog, int id) {
-						// Add code for Yes
-						savePuzzle();
+						dialog.dismiss();
 						SudokuPuzzleActivity.this.finish();
-					}
-				});
-		builder.setNegativeButton(R.string.no,
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						SudokuPuzzleActivity.this.finish();
+						return;
 					}
 				});
 
 		// Create the AlertDialog
-		AlertDialog dialog = builder.create();
+		AlertDialog dialog = builder1.create();
+		dialog.show();
+	}
+
+	@Override
+	public void onBackPressed() {
+		AlertDialog.Builder builder2 = new AlertDialog.Builder(
+				SudokuPuzzleActivity.this);
+		builder2.setMessage(R.string.alertmsg);
+
+		// Add the buttons
+		builder2.setPositiveButton(R.string.yes,
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) { 
+						// Add code for Yes
+						savePuzzle();
+						dialog.dismiss();
+						SudokuPuzzleActivity.this.finish();
+					}
+				});
+		builder2.setNegativeButton(R.string.no,
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+						SudokuPuzzleActivity.this.finish();
+					}
+				});
+
+		// Create the AlertDialog 
+		AlertDialog dialog = builder2.create();
 		dialog.show();
 
 	}
@@ -493,17 +627,59 @@ public class SudokuPuzzleActivity extends Activity {
 	private Runnable updateTimerThread = new Runnable() {
 
 		public void run() {
-			timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
-			
-			seconds = (int) (timeInMilliseconds / 1000);
-			minutes = seconds / 60;
-			seconds = seconds % 60;
 
-			timerVal = String.format("%02d", minutes) + ":"
-					+ String.format("%02d", seconds);
-			timerTextView.setText(timerVal);
-			customHandler.postDelayed(this, 0);
+			if (shouldTimerThreadRun) {
+				timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
+
+				long secsFromMillis = (int) (timeInMilliseconds / 1000);
+				minutes = (int) secsFromMillis / 60;
+				seconds = (int) secsFromMillis % 60;
+
+				timerVal = String.format("%02d", minutes) + ":"
+						+ String.format("%02d", seconds);
+				timerTextView.setText(timerVal);
+				customHandler.postDelayed(this, 0);
+
+				if (numberOfMoves > 0)
+					avgTimePerMove = secsFromMillis / numberOfMoves;
+
+				Long maxInactiveTime = Long.valueOf(sudokuSharedPrefs
+						.getInt(Constants.MAX_TIME_BETWEEN_MOVES) * 60 * 1000);
+
+				Long lastMoveTime = sudokuSharedPrefs
+						.getLong(Constants.LAST_MOVE_TIME);
+
+				Long systemTime = System.currentTimeMillis();
+
+				// Enter this condition only once in an attempt where the user
+				// has not done any inputs for more than the time set in the
+				// settings.
+				if (isTimeOverDialogShown == false
+						&& systemTime.compareTo(lastMoveTime + maxInactiveTime) > 0) {
+
+					isTimeOverDialogShown = true;
+
+					AlertDialog.Builder builder3 = new AlertDialog.Builder(
+							SudokuPuzzleActivity.this);
+					builder3.setMessage(getString(R.string.timeIsOver));
+					builder3.setTitle(getString(R.string.Tekedge));
+					builder3.setNeutralButton("Ok",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(
+										DialogInterface dialogInterface,
+										int arg1) {
+									dialogInterface.dismiss();
+									SudokuPuzzleActivity.this.finish();
+								}
+							});
+
+					// Create the AlertDialog
+					AlertDialog dialog = builder3.create();
+					dialog.show();
+				}
+			}
 		}
 	};
-
 }

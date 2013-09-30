@@ -20,7 +20,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="22dp"
         android:text="@string/app_version"
-        android:textSize="20sp" />
+        android:textSize="@dimen/about_headings" />
 
     <TextView
         android:id="@+id/appVersionVal"
@@ -29,18 +29,7 @@
         android:layout_below="@+id/appVersionTitle"
         android:layout_centerHorizontal="true"
         android:text=""
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/nitinSahdev"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/appVersionVal"
-        android:layout_marginTop="145dp"
-        android:gravity="center"
-        android:text="@string/nitin_sahdev"
-        android:textSize="16sp" />
+        android:textSize="@dimen/about_headings" />
 
     <TextView
         android:id="@+id/poojaGoel"
@@ -58,9 +47,31 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/nitinSahdev"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="48dp"
         android:gravity="center"
         android:text="@string/developers"
-        android:textSize="20sp" />
+        android:textSize="@dimen/about_headings" />
+
+    <TextView
+        android:id="@+id/nitinSahdev"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/appVersionVal"
+        android:layout_marginTop="137dp"
+        android:gravity="center"
+        android:text="@string/nitin_sahdev"
+        android:textSize="16sp" />
+    
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:onClick="OnButtonClicked"
+        android:text="@string/Tekedge"
+        android:textSize="@dimen/subscript_size" />
 
 </RelativeLayout>

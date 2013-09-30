@@ -36,6 +36,24 @@ public class SudokuSharedPreferences{
 		return sharedPreferences.getInt(key, 0);
 	}
 	
+	public Boolean putLong(String key, Long val) {
+		spEditor.putLong(key, val);
+		return spEditor.commit();
+	}
+	
+	public Long getLong(String key) {
+		return sharedPreferences.getLong(key, 0);
+	}
+	
+	public Boolean putFloat(String key, float val) {
+		spEditor.putFloat(key, val);
+		return spEditor.commit();
+	}
+	
+	public float getFloat(String key) {
+		return sharedPreferences.getFloat(key, 0.0f);
+	}
+	
 	public Boolean putString(String key, String val) {
 		spEditor.putString(key, val);
 		return spEditor.commit();

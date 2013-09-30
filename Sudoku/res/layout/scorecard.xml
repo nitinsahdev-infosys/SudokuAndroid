@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/totalScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/totalScoreTitle"
+        android:layout_alignBottom="@+id/totalScoreTitle"
+        android:layout_marginLeft="36dp"
+        android:layout_toRightOf="@+id/averageTimeTitle"
+        android:textColor="#000000"
+        android:textSize="@dimen/scorecard_items_size" />
+
+    <TextView
+        android:id="@+id/averageTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/averageTimeTitle"
+        android:layout_alignBottom="@+id/averageTimeTitle"
+        android:layout_alignLeft="@+id/totalScore"
+        android:textColor="#000000"
+        android:textSize="@dimen/scorecard_items_size" />
+
+    <TextView
+        android:id="@+id/numberOfMovesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/averageTimeTitle"
+        android:layout_marginTop="40dp"
+        android:layout_toLeftOf="@+id/totalScore"
+        android:enabled="false"
+        android:text="@string/numOfMoves"
+        android:textColor="#000000"
+        android:textSize="@dimen/scorecard_items_size" />
+
+    <TextView
+        android:id="@+id/numberOfMoves"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/numberOfMovesTitle"
+        android:layout_alignBottom="@+id/numberOfMovesTitle"
+        android:layout_alignLeft="@+id/averageTime"
+        android:textColor="#000000"
+        android:textSize="@dimen/scorecard_items_size" />
+
+    <TextView
+        android:id="@+id/scorecardTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/totalScore"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
+        android:enabled="false"
+        android:text="@string/scorecardTitle"
+        android:textColor="#000000"
+        android:textSize="@dimen/textview_size" />
+
+    <TextView
+        android:id="@+id/totalScoreTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="102dp"
+        android:enabled="false"
+        android:text="@string/totalPuzzleTime"
+        android:textColor="#000000"
+        android:textSize="@dimen/scorecard_items_size" />
+
+    <TextView
+        android:id="@+id/averageTimeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/totalScoreTitle"
+        android:layout_below="@+id/totalScoreTitle"
+        android:layout_marginTop="37dp"
+        android:enabled="false"
+        android:text="@string/avgTimePerMove"
+        android:textColor="#000000"
+        android:textSize="@dimen/scorecard_items_size" />
+
+    <TextView
+        android:id="@+id/lastMoveTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lastMoveTimeTitle"
+        android:layout_alignLeft="@+id/numberOfMoves"
+        android:textColor="#000000"
+        android:textSize="@dimen/scorecard_items_size" />
+
+    <TextView
+        android:id="@+id/lastMoveTimeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/numberOfMovesTitle"
+        android:layout_marginTop="40dp"
+        android:layout_toLeftOf="@+id/totalScore"
+        android:enabled="false"
+        android:text="@string/timeOfLastMove"
+        android:textColor="#000000"
+        android:textSize="@dimen/scorecard_items_size" />
+
+</RelativeLayout>

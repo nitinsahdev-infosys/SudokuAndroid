@@ -10,7 +10,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/sudoku_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -36,7 +36,8 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.game.sudoku.HelpActivity"
+            android:name="com.game.sudoku.ScorecardActivity"
+            android:label="@string/title_activity_scorecard"
             android:screenOrientation="portrait" >
         </activity>
     </application>

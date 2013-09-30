@@ -1,40 +1,36 @@
 package com.game.sudoku;
 
-import com.game.sudoku.utils.Constants;
-import com.game.sudoku.utils.SudokuSharedPreferences;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
+
+import com.game.sudoku.utils.Constants;
+import com.game.sudoku.utils.SudokuSharedPreferences;
 
 public class MainMenuActivity extends Activity {
-	public final String ACTION_VAL = null;
-
 	public SudokuSharedPreferences sudokuSharedPreferences = null;
-
-	String[] strArray = { "Easy", "Medium", "Hard" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_menu);
 
-		sudokuSharedPreferences = SudokuSharedPreferences.getSudokuSharedPreferences(this);
+		sudokuSharedPreferences = SudokuSharedPreferences
+				.getSudokuSharedPreferences(this);
+		sudokuSharedPreferences.putInt(Constants.MAX_TIME_BETWEEN_MOVES, 15);
 	}
-	
+
 	@Override
 	protected void onResume() {
-		if ( !sudokuSharedPreferences.getBoolean(Constants.IS_PUZZLE_SAVED) ) {
+		if (!sudokuSharedPreferences.getBoolean(Constants.IS_PUZZLE_SAVED)) {
 			findViewById(R.id.resumePuzzle).setEnabled(false);
 		} else {
 			findViewById(R.id.resumePuzzle).setEnabled(true);
 		}
-		
+
 		super.onResume();
 	}
 
@@ -49,7 +45,7 @@ public class MainMenuActivity extends Activity {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
 			// Add the buttons
-			builder.setSingleChoiceItems(strArray, -1,
+			builder.setSingleChoiceItems(R.array.strArray, -1,
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
 
@@ -59,8 +55,6 @@ public class MainMenuActivity extends Activity {
 							bundle.putInt("ID", id);
 							intent.putExtras(bundle);
 							startActivity(intent);
-							Toast.makeText(getApplicationContext(),
-									"message " + id, Toast.LENGTH_SHORT).show();
 							dialog.cancel();
 						}
 					});
@@ -69,40 +63,21 @@ public class MainMenuActivity extends Activity {
 			dialog.show();
 		}
 		if (v.equals(findViewById(R.id.resumePuzzle))) {
-			Toast.makeText(getApplicationContext(),
-					"Resume ", Toast.LENGTH_SHORT).show();
-			
 			// Id for resume puzzle...
 			int id = 3;
-			
+
 			Intent resumeIntent = new Intent(getApplicationContext(),
 					SudokuPuzzleActivity.class);
 			Bundle bundle = new Bundle();
 			bundle.putInt("ID", id);
 			resumeIntent.putExtras(bundle);
 			startActivity(resumeIntent);
-			
-			Toast.makeText(getApplicationContext(),
-					"message " + id, Toast.LENGTH_SHORT).show();
-		
 		}
 		if (v.equals(findViewById(R.id.about))) {
-			Toast.makeText(getApplicationContext(),
-					"about ", Toast.LENGTH_SHORT).show();
 			intent = new Intent(getApplicationContext(), AboutActivity.class);
 			startActivity(intent);
 		}
-		if (v.equals(findViewById(R.id.help))) {
-			Toast.makeText(getApplicationContext(),
-					"help ", Toast.LENGTH_SHORT).show();
-			
-			intent = new Intent(getApplicationContext(), HelpActivity.class);
-			startActivity(intent);
-		}
 		if (v.equals(findViewById(R.id.settings))) {
-			Toast.makeText(getApplicationContext(),
-					"settings ", Toast.LENGTH_SHORT).show();
-			
 			intent = new Intent(getApplicationContext(), SettingsActivity.class);
 			startActivity(intent);
 		}

@@ -8,9 +8,12 @@
     <dimen name="textview_size">22sp</dimen>
     <dimen name="inputPanel_textView_width">61dp</dimen>
     <dimen name="inputPanel_textView_height">40dp</dimen>
-    <dimen name="inputPanel_tv_size">20sp</dimen>
+    <dimen name="inputPanel_tv_size">24sp</dimen>
+    <dimen name="about_headings">20sp</dimen>
     <dimen name="main_menu_margin_top">28dp</dimen>
     <dimen name="main_menu_text_size">18sp</dimen>
+    <dimen name="scorecard_items_size">16sp</dimen>
+    <dimen name="subscript_size">14sp</dimen>
     <dimen name="main_menu_button_size">130dp</dimen>
 
 </resources>
